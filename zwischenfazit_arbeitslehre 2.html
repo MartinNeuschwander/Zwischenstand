@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zwischenfazit – Arbeitslehre</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap');
+
+  :root {
+    --amber: #E8A020;
+    --amber-light: #FDF3E0;
+    --amber-dark: #B37A10;
+    --teal: #1D9E75;
+    --teal-light: #E1F5EE;
+    --purple: #534AB7;
+    --purple-light: #EEEDFE;
+    --coral: #D85A30;
+    --coral-light: #FAECE7;
+    --gray-light: #F7F6F3;
+    --gray-border: #DDD9CE;
+    --text: #2C2C2A;
+    --text-muted: #5F5E5A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: #fff;
+    padding: 24px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--amber);
+  }
+  .header-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .header-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 3px;
+  }
+  .header-badge {
+    background: var(--amber-light);
+    border: 1.5px solid var(--amber);
+    color: var(--amber-dark);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  /* META FIELDS */
+  .meta-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .meta-field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .meta-field input {
+    width: 100%;
+    border: 1.5px solid var(--gray-border);
+    border-radius: 6px;
+    padding: 7px 10px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 13px;
+    background: var(--gray-light);
+  }
+  .meta-field input:focus { outline: 2px solid var(--amber); border-color: transparent; }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 16px;
+    border: 1.5px solid var(--gray-border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+  }
+  .section-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .section-dim {
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: auto;
+    padding: 3px 8px;
+    border-radius: 10px;
+  }
+  .section-body {
+    padding: 12px 14px;
+    border-top: 1.5px solid var(--gray-border);
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Colour variants */
+  .s-amber .section-header { background: var(--amber-light); }
+  .s-amber .section-icon { background: var(--amber); color: #fff; }
+  .s-amber .section-title { color: var(--amber-dark); }
+  .s-amber .section-dim { background: var(--amber); color: #fff; }
+
+  .s-teal .section-header { background: var(--teal-light); }
+  .s-teal .section-icon { background: var(--teal); color: #fff; }
+  .s-teal .section-title { color: #085041; }
+  .s-teal .section-dim { background: var(--teal); color: #fff; }
+
+  .s-purple .section-header { background: var(--purple-light); }
+  .s-purple .section-icon { background: var(--purple); color: #fff; }
+  .s-purple .section-title { color: #3C3489; }
+  .s-purple .section-dim { background: var(--purple); color: #fff; }
+
+  .s-coral .section-header { background: var(--coral-light); }
+  .s-coral .section-icon { background: var(--coral); color: #fff; }
+  .s-coral .section-title { color: #4A1B0C; }
+  .s-coral .section-dim { background: var(--coral); color: #fff; }
+
+  .s-gray .section-header { background: var(--gray-light); }
+  .s-gray .section-icon { background: #888780; color: #fff; }
+  .s-gray .section-title { color: var(--text); }
+  .s-gray .section-dim { background: #888780; color: #fff; display: none; }
+
+  /* QUESTION ROW */
+  .q-row { display: flex; flex-direction: column; gap: 4px; }
+  .q-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .q-hint {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+  textarea {
+    width: 100%;
+    border: 1.5px solid var(--gray-border);
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 13px;
+    resize: vertical;
+    background: var(--gray-light);
+    line-height: 1.5;
+  }
+  textarea:focus { outline: 2px solid var(--amber); border-color: transparent; background: #fff; }
+
+  /* SCALE */
+  .scale-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .scale-label-left, .scale-label-right {
+    font-size: 11px;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .scale-options {
+    display: flex;
+    gap: 6px;
+  }
+  .scale-options label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+  }
+  .scale-options input[type="radio"] { display: none; }
+  .scale-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--gray-border);
+    background: var(--gray-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text-muted);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .scale-options input[type="radio"]:checked + .scale-dot {
+    background: var(--amber);
+    border-color: var(--amber-dark);
+    color: #fff;
+  }
+
+  /* CHECKBOX GROUP */
+  .check-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .check-group label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 6px 10px;
+    border: 1.5px solid var(--gray-border);
+    border-radius: 6px;
+    background: var(--gray-light);
+  }
+  .check-group input[type="checkbox"] { accent-color: var(--amber); width: 15px; height: 15px; }
+  .check-other {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    padding: 6px 10px;
+    border: 1.5px solid var(--gray-border);
+    border-radius: 6px;
+    background: var(--gray-light);
+    grid-column: 1 / -1;
+  }
+  .check-other input[type="checkbox"] { accent-color: var(--amber); width: 15px; height: 15px; flex-shrink: 0; }
+  .check-other input[type="text"] {
+    flex: 1;
+    border: none;
+    border-bottom: 1.5px solid var(--gray-border);
+    background: transparent;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 13px;
+    padding: 0 4px;
+    outline: none;
+    color: var(--text);
+  }
+  .check-other input[type="text"]:focus { border-bottom-color: var(--amber); }
+
+  /* NAMES GRID */
+  .names-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .name-field {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1.5px solid var(--gray-border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    background: var(--gray-light);
+  }
+  .name-field .name-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    min-width: 14px;
+  }
+  .name-field input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    outline: none;
+    min-width: 0;
+  }
+  .name-field input:focus { border-bottom: 1.5px solid var(--amber); }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--gray-border);
+    margin: 2px 0;
+  }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 18px;
+    padding-top: 12px;
+    border-top: 1.5px solid var(--gray-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+  }
+  .footer-note {
+    font-size: 11px;
+    color: var(--text-muted);
+    max-width: 340px;
+  }
+  .footer-sign {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .footer-sign .sign-line {
+    border-bottom: 1.5px solid var(--gray-border);
+    width: 180px;
+    height: 24px;
+  }
+  .footer-sign .sign-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  @media print {
+    body { padding: 12px; font-size: 13px; }
+    textarea { background: #fff; min-height: 40px; }
+    .section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="header-title">Zwischenfazit</div>
+    <div class="header-sub">Arbeitslehre – Gruppenreflexion</div>
+  </div>
+  <div class="header-badge">Mitte des Tages</div>
+</div>
+
+<div class="meta-row">
+  <div class="meta-field">
+    <label>Datum</label>
+    <input type="date" />
+  </div>
+  <div class="meta-field">
+    <label>Gruppenname / Thema</label>
+    <input type="text" placeholder="z. B. Team Küche, Projekt Holz …" />
+  </div>
+</div>
+<div class="meta-field" style="margin-bottom: 20px;">
+  <label>Teilnehmer*innen der Gruppe</label>
+  <div class="names-grid">
+    <div class="name-field"><span class="name-num">1</span><input type="text" placeholder="Vorname …" /></div>
+    <div class="name-field"><span class="name-num">2</span><input type="text" placeholder="Vorname …" /></div>
+    <div class="name-field"><span class="name-num">3</span><input type="text" placeholder="Vorname …" /></div>
+    <div class="name-field"><span class="name-num">4</span><input type="text" placeholder="Vorname …" /></div>
+    <div class="name-field"><span class="name-num">5</span><input type="text" placeholder="Vorname …" /></div>
+  </div>
+</div>
+
+<!-- BLOCK 1: Was wolltet ihr machen? -->
+<div class="section s-amber">
+  <div class="section-header">
+    <div class="section-icon">1</div>
+    <div class="section-title">Was habt ihr euch vorgenommen?</div>
+    <div class="section-dim">Organisatorisch</div>
+  </div>
+  <div class="section-body">
+    <div class="q-row">
+      <div class="q-label">Unser Ziel für heute war …</div>
+      <div class="q-hint">Was habt ihr am Anfang des Tages gesagt, was ihr machen wollt?</div>
+      <textarea rows="2" placeholder="Wir wollten heute …"></textarea>
+    </div>
+    <div class="q-row">
+      <div class="q-label">Wie habt ihr eure Zeit eingeteilt?</div>
+      <div class="q-hint">Hattet ihr einen Plan? Wer macht was?</div>
+      <textarea rows="2" placeholder="Wir haben uns aufgeteilt, indem …"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- BLOCK 2: Wie weit seid ihr gekommen? -->
+<div class="section s-teal">
+  <div class="section-header">
+    <div class="section-icon">2</div>
+    <div class="section-title">Wie weit seid ihr gekommen?</div>
+    <div class="section-dim">Inhaltlich</div>
+  </div>
+  <div class="section-body">
+    <div class="q-row">
+      <div class="q-label">Das haben wir bis jetzt geschafft …</div>
+      <textarea rows="2" placeholder="Wir haben bereits …"></textarea>
+    </div>
+    <div class="q-row">
+      <div class="q-label">Wie zufrieden seid ihr mit eurem Fortschritt?</div>
+      <div class="q-hint">Markiert eine Note: 1 = sehr zufrieden · 6 = gar nicht zufrieden</div>
+      <div class="scale-row">
+        <span class="scale-label-left">sehr zufrieden</span>
+        <div class="scale-options">
+          <label><input type="radio" name="progress" value="1"><div class="scale-dot">1</div></label>
+          <label><input type="radio" name="progress" value="2"><div class="scale-dot">2</div></label>
+          <label><input type="radio" name="progress" value="3"><div class="scale-dot">3</div></label>
+          <label><input type="radio" name="progress" value="4"><div class="scale-dot">4</div></label>
+          <label><input type="radio" name="progress" value="5"><div class="scale-dot">5</div></label>
+          <label><input type="radio" name="progress" value="6"><div class="scale-dot">6</div></label>
+        </div>
+        <span class="scale-label-right">gar nicht</span>
+      </div>
+    </div>
+    <div class="q-row">
+      <div class="q-label">Konntet ihr eigene Ideen einbringen?</div>
+      <div class="q-hint">Habt ihr etwas verändert oder anders gemacht als geplant?</div>
+      <textarea rows="2" placeholder="Unsere eigene Idee war …   / Wir haben nichts verändert, weil …"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- BLOCK 3: Wie habt ihr zusammengearbeitet? -->
+<div class="section s-purple">
+  <div class="section-header">
+    <div class="section-icon">3</div>
+    <div class="section-title">Wie habt ihr zusammengearbeitet?</div>
+    <div class="section-dim">Methodisch</div>
+  </div>
+  <div class="section-body">
+    <div class="q-row">
+      <div class="q-label">Was habt ihr benutzt oder ausprobiert? (Mehreres möglich)</div>
+      <div class="check-group">
+        <label><input type="checkbox"> Werkzeuge / Maschinen</label>
+        <label><input type="checkbox"> Bücher / Anleitungen</label>
+        <label><input type="checkbox"> Internet / Videos</label>
+        <label><input type="checkbox"> Absprachen in der Gruppe</label>
+        <label><input type="checkbox"> Skizzen / Zeichnungen</label>
+        <label><input type="checkbox"> Ausprobieren (Trial &amp; Error)</label>
+        <label><input type="checkbox"> Hilfe bei Mitschüler*innen</label>
+        <div class="check-other"><input type="checkbox"><span style="white-space:nowrap;">Anderes:</span><input type="text" placeholder="Was noch? …" /></div>
+      </div>
+    </div>
+    <div class="q-row">
+      <div class="q-label">Was hat in der Zusammenarbeit gut geklappt?</div>
+      <textarea rows="2" placeholder="Gut geklappt hat …"></textarea>
+    </div>
+    <div class="q-row">
+      <div class="q-label">Gab es Schwierigkeiten? Was war schwer?</div>
+      <textarea rows="2" placeholder="Schwierig war …"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- BLOCK 4: Mitsprache & Rückmeldung -->
+<div class="section s-coral">
+  <div class="section-header">
+    <div class="section-icon">4</div>
+    <div class="section-title">Eure Meinung – Mitsprache &amp; Rückmeldung</div>
+    <div class="section-dim">Normbezogen</div>
+  </div>
+  <div class="section-body">
+    <div class="q-row">
+      <div class="q-label">Hattet ihr genug Einfluss darauf, was und wie ihr arbeitet?</div>
+      <div class="q-hint">Markiert eine Note: 1 = ja, genau richtig · 6 = viel zu wenig</div>
+      <div class="scale-row">
+        <span class="scale-label-left">genau richtig</span>
+        <div class="scale-options">
+          <label><input type="radio" name="control" value="1"><div class="scale-dot">1</div></label>
+          <label><input type="radio" name="control" value="2"><div class="scale-dot">2</div></label>
+          <label><input type="radio" name="control" value="3"><div class="scale-dot">3</div></label>
+          <label><input type="radio" name="control" value="4"><div class="scale-dot">4</div></label>
+          <label><input type="radio" name="control" value="5"><div class="scale-dot">5</div></label>
+          <label><input type="radio" name="control" value="6"><div class="scale-dot">6</div></label>
+        </div>
+        <span class="scale-label-right">viel zu wenig</span>
+      </div>
+    </div>
+    <div class="q-row">
+      <div class="q-label">Was wünscht ihr euch als Rückmeldung vom Lernbegleiter?</div>
+      <div class="q-hint">Wie soll er euch helfen? Eher beobachten, Tipps geben, Fragen stellen, loben …?</div>
+      <textarea rows="2" placeholder="Wir wünschen uns …"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- BLOCK 5: Nächste Schritte -->
+<div class="section s-gray">
+  <div class="section-header">
+    <div class="section-icon">5</div>
+    <div class="section-title">Was sind eure nächsten Schritte?</div>
+    <div class="section-dim" style="display:none"></div>
+  </div>
+  <div class="section-body">
+    <div class="q-row">
+      <div class="q-label">Das machen wir als nächstes …</div>
+      <div class="q-hint">Seid so genau wie möglich: Was? Wer? Bis wann?</div>
+      <textarea rows="3" placeholder="Als nächstes werden wir … Das macht … bis …"></textarea>
+    </div>
+    <div class="q-row">
+      <div class="q-label">Wenn wir nicht weiterkommen, werden wir …</div>
+      <div class="q-hint">Was ist euer Plan B?</div>
+      <textarea rows="2" placeholder="Falls etwas nicht klappt, werden wir …"></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-note">
+    Dieses Formular hilft euch, euren eigenen Lernweg zu verstehen und selbstständig weiterzumachen. Ihr müsst nicht perfekte Antworten schreiben – es geht um eure ehrliche Einschätzung.
+  </div>
+  <div class="footer-sign">
+    <div class="sign-line"></div>
+    <div class="sign-label">Unterschrift Lernbegleiter</div>
+  </div>
+</div>
+
+</body>
+</html>
